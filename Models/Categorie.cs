@@ -1,7 +1,17 @@
+using System.Collections.ObjectModel;
+
 namespace WebApi.models;
 
-public class Categorie{
+public class Categorie
+{
+    public Categorie()
+    {
+        Products = new Collection<Product>();
+    }
     public int Id { get; set; }
     public string? Name { get; set; }
-    public string? ImageUrl  { get; set; }
+    public string? ImageUrl { get; set; }
+
+    public ICollection<Product>? Products { get; set; }
+
 }

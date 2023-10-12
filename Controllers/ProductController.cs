@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApi.Context;
 using WebApi.models;
 
@@ -44,5 +45,18 @@ public class ProductController : ControllerBase
         _context.SaveChanges();
 
         return new CreatedAtRouteResult("ObterProduto", new { id = product.ProductId }, product);
+    }
+    [HttpPut]
+    public ActionResult Put(int id, Product product)
+    {
+        if (id != product.ProductId)
+        {
+            return BadRequest();
+        }
+        _context.Entry(product).State = EntityState.Modified;
+        _context.SaveChanges();
+
+        return Ok(product);
+
     }
 }
